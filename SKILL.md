@@ -1,7 +1,7 @@
 ---
 slug: pdf-analysis
 name: PDF Analysis
-version: 0.2.0
+version: 0.2.1
 description: >
   Analyze and extract content from PDF documents — text, tables, images, metadata, and structure. PDF analyzer, PDF content extractor, PDF data extraction, document analysis tool, PDF text miner, PDF table extractor, PDF image extractor, PDF metadata reader, PDF structure analyzer, PDF content parser, document intelligence, PDF inspection tool.
 
