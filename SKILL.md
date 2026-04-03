@@ -1,28 +1,63 @@
 ---
-slug: pdf-analysis
-name: PDF Analysis
-version: 0.2.1
-description: >
-  Analyze and extract content from PDF documents — text, tables, images, metadata, and structure. PDF analyzer, PDF content extractor, PDF data extraction, document analysis tool, PDF text miner, PDF table extractor, PDF image extractor, PDF metadata reader, PDF structure analyzer, PDF content parser, document intelligence, PDF inspection tool.
-
-  Use when asked to 'analyze a PDF', 'extract data from PDF', 'what's in this PDF', 'pull tables from a PDF', 'read PDF content', 'get information from a document', 'inspect a PDF file'. Solves the problem of PDFs being opaque binary files — extracts all content into usable, structured formats for downstream processing, search, and analysis.
-
-  PDF分析, PDF文档分析, PDF内容提取, PDF数据提取, PDF表格提取, PDF元数据读取, 文档智能分析, PDF结构解析.
-
-  Powered by MinerU document parsing engine for comprehensive PDF analysis including layout detection, table recognition, image extraction, OCR for scanned pages, and metadata parsing. Ideal for data analysts, legal professionals, financial auditors, and anyone who needs to extract actionable information from PDF documents. Handles reports, contracts, invoices, forms, and any standard PDF.
-tags:
-  - pdf
-  - analysis
-  - extraction
-  - tables
-  - images
-  - metadata
-  - document
-  - mineru
-  - ocr
-  - data
-  - parser
-  - intelligence
+name: pdf-analysis
+description: "PDF Analysis - analyze and extract content from PDF files to structured Markdown using MinerU. Use for reading, summarizing, or parsing PDF documents."
+homepage: https://mineru.net
+metadata: {"openclaw": {"emoji": "📄", "requires": {"bins": ["mineru-open-api"], "env": ["MINERU_TOKEN"]}, "primaryEnv": "MINERU_TOKEN", "install": [{"id": "npm", "kind": "node", "package": "mineru-open-api", "bins": ["mineru-open-api"], "label": "Install via npm"}, {"id": "go", "kind": "go", "package": "github.com/opendatalab/MinerU-Ecosystem/cli/mineru-open-api", "bins": ["mineru-open-api"], "label": "Install via go install", "os": ["darwin", "linux"]}]}}
 ---
 
-Use the mineru tool to analyze the provided PDF document. Extract all content including text, tables, images, and metadata. Identify the document structure, detect layouts, and parse all elements into organized, usable output. Provide a comprehensive analysis of the document's contents and structure.
+# PDF Analysis
+
+Analyze and extract structured content from PDF files using MinerU. Returns Markdown with layout, headings, and structure preserved.
+
+## Install
+
+```bash
+npm install -g mineru-open-api
+# or via Go (macOS/Linux):
+go install github.com/opendatalab/MinerU-Ecosystem/cli/mineru-open-api@latest
+```
+
+## Quick Start
+
+```bash
+# Quick analysis, no token required (max 10 MB / 20 pages)
+mineru-open-api flash-extract report.pdf
+
+# Save to directory
+mineru-open-api flash-extract report.pdf -o ./out/
+
+# From URL
+mineru-open-api flash-extract https://example.com/report.pdf
+
+# With language hint
+mineru-open-api flash-extract report.pdf --language en
+
+# Full analysis with tables and formulas (requires token)
+mineru-open-api extract report.pdf -o ./out/
+```
+
+## Authentication
+
+No token needed for `flash-extract`. Token required for `extract`:
+
+```bash
+mineru-open-api auth             # Interactive token setup
+export MINERU_TOKEN="your-token" # Or via environment variable
+```
+
+Create token at: https://mineru.net/apiManage/token
+
+## Capabilities
+
+- Supported input: .pdf (local file or URL)
+- `flash-extract`: quick, no token, max 10 MB / 20 pages, Markdown output only
+- `extract`: token required, full features (tables, formulas, OCR, multi-format output)
+- Language hint with `--language` (default: `ch`, use `en` for English)
+- Page range with `--pages` (e.g. `1-10`)
+
+## Notes
+
+- Use `flash-extract` for quick reads; use `extract` for tables, formulas, or files over 10 MB
+- Output goes to stdout by default; use `-o <dir>` to save to a file or directory
+- All progress/status messages go to stderr; document content goes to stdout
+- MinerU is open-source by OpenDataLab (Shanghai AI Lab): https://github.com/opendatalab/MinerU
